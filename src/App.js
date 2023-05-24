@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { MyButton } from './MyButton';
@@ -8,6 +9,8 @@ const user = {
   imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
   imageSize: 90,
 };
+
+// const [hide, setHide] = useState(false);
 
 const shoppingProducts = [
   { title: 'Cabbage', isFruit: false, id: 1 },
@@ -33,13 +36,14 @@ function ListProducts() {
   )
 }
 
-let showHide = false
+// let showHide = false
 
-export function toggleShowHide() {
-  showHide = true
-  document.querySelector('#show-hide').innerHTML = "Show/hide is " + showHide.toString()
-  alert(showHide.toString())
-}
+// export function toggleShowHide() {
+//   setHide(! hide)
+//   // showHide = ! showHide
+//   document.querySelector('#show-hide').innerHTML = "Show/hide is " + hide.toString()
+//   alert(hide.toString())
+// }
 
 function ShoppingList() {
   const shoppingItems = shoppingProducts.map(product =>
@@ -58,13 +62,29 @@ function ShoppingList() {
   );
 }
 
+// function ProfileButton() {
+//   return (
+//     <button id="show-hide" onClick={toggleShowHide}>Show/hide is {showHide.toString()}</button>
+//     //       dangerouslySetInnerHTML={{ __html: "Show/hide is " + showHide.toString() }} />
+//   );
+// }
+
 function ProfileButton() {
+  const [showProfile, setShowProfile] = useState(false);
+
+  const toggleShowProfile = () => {
+    setShowProfile(!showProfile);
+  };
+
   return (
-    <button id="show-hide" onClick={toggleShowHide}>Show/hide is {showHide.toString()}</button>
-    //       dangerouslySetInnerHTML={{ __html: "Show/hide is " + showHide.toString() }} />
+    <div>
+      <button id="show-hide" onClick={toggleShowProfile}>
+        {showProfile ? 'Hide' : 'Show'} Profile
+      </button>
+      {showProfile && <Profile />}
+    </div>
   );
 }
-
 
 function Profile() {
   return (
@@ -103,9 +123,8 @@ function App() {
         <MyButton />
         <MyButton />
         <ProfileButton />
-        <img className='avatar' src="/avatar.jpeg"/>
+        <img className='avatar' alt="Avatar" src="/avatar.jpeg"/>
         <Greeting name="world" />
-        {showHide && <Profile />}
         <ListProducts />
         <ShoppingList />
       </header>
