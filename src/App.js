@@ -4,8 +4,13 @@ import { MyButton } from './MyButton';
 import { Greeting } from './Greeting';
 import { ProfileButton } from './ProfileButton';
 import { ShoppingList } from './ShoppingList';
+import { useState } from 'react';
 
 function App() {
+  const [count, setCount] = useState(0);
+  function handleClick() {
+    setCount(count + 1);
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -21,9 +26,9 @@ function App() {
         >
           Learn React
         </a>
-        <h3>Counters that update separately</h3>
-        <MyButton />
-        <MyButton />
+        <h3>Counters that update together</h3>
+        <MyButton count={count} onClick={handleClick}/>
+        <MyButton count={count} onClick={handleClick}/>
         <ProfileButton />
         <Greeting name="world" />
         <ShoppingList />
