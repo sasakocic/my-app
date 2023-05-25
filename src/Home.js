@@ -17,10 +17,7 @@ export function Home() {
       >
         Learn React
       </a>
-      <Link to="/profile">Profile</Link>
       <Greeting name="world" />
-      <Link to="/shopping-list">Shopping List</Link>
-      <Link to="/counters">Counters</Link>
     </header>
   );
 }
