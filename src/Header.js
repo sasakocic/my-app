@@ -6,6 +6,9 @@ export function Header() {
       <div className="container">
         <Link className="navbar-brand" to="/">Home</Link>
         <ul className="navbar-nav">
+        <li className="nav-item">
+            <Link className="nav-link" to="/greeting">Greeting</Link>
+          </li>
           <li className="nav-item">
             <Link className="nav-link" to="/profile">Profile</Link>
           </li>

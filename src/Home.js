@@ -1,5 +1,4 @@
 import logo from './logo.svg';
-import { Greeting } from './Greeting';
 
 export function Home() {
   return (
@@ -16,7 +15,6 @@ export function Home() {
       >
         Learn React
       </a>
-      <Greeting name="world" />
     </header>
   );
 }

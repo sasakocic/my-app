@@ -7,11 +7,13 @@ import { Home } from './Home';
 import { TermsAndConditions } from './TermsAndConditions';
 import PrivacyPolicy from './PrivacyPolicy';
 import Imprint from './Imprint';
+import Greeting from './Greeting';
 
 function Main() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/greeting" element={<Greeting name="World" />} />
       <Route path="/profile" element={<ProfileButton />} />
       <Route path="/shopping-list" element={<ShoppingList />} />
       <Route path="/counters" element={<Counters />} />

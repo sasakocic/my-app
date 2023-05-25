@@ -1,5 +1,6 @@
 import avatarStyles from './styles/Avatar.module.css';
-export function Greeting({ name }) {
+
+function Greeting({ name }) {
   return (
     <>
       <h3>Hello, {name}</h3>
@@ -7,3 +8,5 @@ export function Greeting({ name }) {
     </>
   );
 }
+
+export default Greeting;
