@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import { Greeting } from './Greeting';
-import { Link } from 'react-router-dom';
 
 export function Home() {
   return (
