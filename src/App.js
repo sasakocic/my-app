@@ -15,6 +15,11 @@ function App() {
   }
   return (
     <div className="App">
+      <Switch>
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/shopping-list" component={ShoppingList} />
+        {/* Other routes */}
+      </Switch>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
