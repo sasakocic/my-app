@@ -1,5 +1,8 @@
 export function Greeting({ name }) {
   return (
-    <h2>Hello, {name}</h2>
+    <>
+      <h3>Hello, {name}</h3>
+      <img className='avatar' alt="Avatar" src="/avatar.jpeg"/>
+    </>
   );
 }
