@@ -4,6 +4,7 @@ import { MyButton } from './MyButton';
 import { Greeting } from './Greeting';
 import { ProfileButton } from './ProfileButton';
 import { ShoppingList } from './ShoppingList';
+import { Profile } from './Profile';
 
 function App() {
   return (
