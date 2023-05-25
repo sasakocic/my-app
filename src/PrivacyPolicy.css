@@ -1,0 +1,38 @@
+/* PrivacyPolicy.css */
+
+.PrivacyPolicy-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.PrivacyPolicy-heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.PrivacyPolicy-section {
+  margin-bottom: 20px;
+}
+
+.PrivacyPolicy-subheading {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.PrivacyPolicy-content {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.PrivacyPolicy-list {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.PrivacyPolicy-list-item {
+  margin-bottom: 5px;
+}

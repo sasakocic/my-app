@@ -1,0 +1,49 @@
+/* Imprint.css */
+
+.Imprint-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.Imprint-heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.Imprint-subheading {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.Imprint-content {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.Imprint-disclaimer,
+.Imprint-liability,
+.Imprint-copyright {
+  margin-bottom: 20px;
+}
+
+.Imprint-disclaimer-heading,
+.Imprint-liability-heading,
+.Imprint-copyright-heading {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.Imprint-contact {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.Imprint-contact-heading {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
