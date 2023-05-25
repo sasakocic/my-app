@@ -5,6 +5,8 @@ import { Greeting } from './Greeting';
 import { ProfileButton } from './ProfileButton';
 import { ShoppingList } from './ShoppingList';
 import { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, ListGroup, Card } from 'react-bootstrap';
 
 function App() {
   const [count, setCount] = useState(0);

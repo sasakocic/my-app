@@ -1,3 +1,4 @@
+import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { Profile } from './Profile';
 
@@ -8,9 +9,9 @@ export function ProfileButton() {
   };
   return (
     <div>
-      <button id="show-hide" onClick={toggleShowProfile}>
+      <Button id="show-hide" onClick={toggleShowProfile}>
         {showProfile ? 'Hide' : 'Show'} Profile
-      </button>
+      </Button>
       {showProfile && <Profile />}
     </div>
   );

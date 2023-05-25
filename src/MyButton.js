@@ -1,8 +1,10 @@
+import { Button } from 'react-bootstrap';
+
 export function MyButton({count, onClick}) {
 
     return (
-    <button onClick={onClick}>
+    <Button variant="primary" onClick={onClick}>
       Clicked {count} times
-    </button>
+    </Button>
   );
 }
