@@ -11,7 +11,8 @@ AWS.config.update({
 const AuthForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [tokens, setTokens] = useState({ accessToken: "", refreshToken: "" });
+  const [refreshTimeout, setRefreshTimeout] = useState(0);
+  const [tokens, setTokens] = useState({ accessToken: "", refreshToken: "", email: "" });
 
   const handleSignIn = () => {
     const cognito = new AWS.CognitoIdentityServiceProvider();
@@ -33,8 +34,18 @@ const AuthForm = () => {
         // Handle the authentication success
         const accessToken = data.AuthenticationResult.AccessToken;
         const refreshToken = data.AuthenticationResult.RefreshToken;
+        const expiresIn = data.AuthenticationResult.ExpiresIn;
+        const idToken = data.AuthenticationResult.IdToken;
+        // Decode the ID token to extract the user attributes
+        const decodedIdToken = jwtDecode(idToken);
+        const email = decodedIdToken.email; // Extract the email attribute
         // Store the access token and refresh token in state
-        setTokens({ accessToken, refreshToken });
+        setTokens({ accessToken, refreshToken, email });
+        // Schedule a token refresh when the access token is close to expiration
+        const refreshTimeout = setTimeout(refreshAccessToken, expiresIn * 1000 * 0.9); // Refresh at 90% of the expiration time
+
+        // Store the refresh timeout ID in state for later cleanup
+        setRefreshTimeout(refreshTimeout);        
         console.log(data.AuthenticationResult.AccessToken);
       }
     });
@@ -58,7 +69,9 @@ const AuthForm = () => {
             ...prevTokens,
             accessToken: "",
           }));
-          // Handle the sign-out success
+          // Clear the refresh timeout when signing out
+          clearTimeout(refreshTimeout);
+          // Handle the sign-out success          
         }
       });
     } else {
