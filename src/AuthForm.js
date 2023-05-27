@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import AWS from 'aws-sdk';
-import { Button, Form } from 'react-bootstrap';
+import React, { useState } from "react";
+import AWS from "aws-sdk";
+import { Button, Form } from "react-bootstrap";
 
-// Update the AWS SDK configuration with the desired region
 AWS.config.update({
-    region: process.env.REACT_APP_AWS_REGION,
-    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
-  });
+  region: process.env.REACT_APP_AWS_REGION,
+  accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+});
 
 const AuthForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [tokens, setTokens] = useState({ accessToken: "", refreshToken: "" });
 
   const handleSignIn = () => {
     const cognito = new AWS.CognitoIdentityServiceProvider();
     const params = {
-      AuthFlow: 'ADMIN_NO_SRP_AUTH',
+      AuthFlow: "ADMIN_NO_SRP_AUTH",
       ClientId: process.env.REACT_APP_AWS_COGNITO_CLIENT_ID,
-      UserPoolId: process.env.REACT_APP_AWS_COGNITO_USER_POOL_ID, 
+      UserPoolId: process.env.REACT_APP_AWS_COGNITO_USER_POOL_ID,
       AuthParameters: {
         USERNAME: username,
         PASSWORD: password,
@@ -31,23 +31,63 @@ const AuthForm = () => {
       } else {
         console.log(data);
         // Handle the authentication success
+        const accessToken = data.AuthenticationResult.AccessToken;
+        const refreshToken = data.AuthenticationResult.RefreshToken;
+        // Store the access token and refresh token in state
+        setTokens({ accessToken, refreshToken });
+        console.log(data.AuthenticationResult.AccessToken);
       }
     });
-  };
+  };  
 
   const handleSignOut = () => {
+    if (tokens.accessToken) {
+      const cognito = new AWS.CognitoIdentityServiceProvider();
+      const params = {
+        AccessToken: tokens.accessToken,
+      };
+
+      cognito.globalSignOut(params, (err, data) => {
+        if (err) {
+          console.error(err);
+          // Handle the sign-out error
+        } else {
+          console.log(data);
+          // Clear the access token from state
+          setTokens((prevTokens) => ({
+            ...prevTokens,
+            accessToken: "",
+          }));
+          // Handle the sign-out success
+        }
+      });
+    } else {
+      // Access token is empty, handle the sign-out scenario accordingly
+    }
+  };
+
+  const refreshAccessToken = () => {
     const cognito = new AWS.CognitoIdentityServiceProvider();
     const params = {
-      AccessToken: 'user-access-token',
+      AuthFlow: "REFRESH_TOKEN_AUTH",
+      ClientId: process.env.REACT_APP_AWS_COGNITO_CLIENT_ID,
+      UserPoolId: process.env.REACT_APP_AWS_COGNITO_USER_POOL_ID,
+      AuthParameters: {
+        REFRESH_TOKEN: tokens.refreshToken,
+      },
     };
-
-    cognito.globalSignOut(params, (err, data) => {
+    cognito.adminInitiateAuth(params, (err, data) => {
       if (err) {
         console.error(err);
-        // Handle the sign-out error
+        // Handle the error when refreshing access token fails
       } else {
         console.log(data);
-        // Handle the sign-out success
+        const newAccessToken = data.AuthenticationResult.AccessToken;
+        // Update the access token in state
+        setTokens((prevTokens) => ({
+          ...prevTokens,
+          accessToken: newAccessToken,
+        }));
       }
     });
   };
