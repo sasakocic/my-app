@@ -3,7 +3,7 @@ import AWS from "aws-sdk";
 const Logout = () => {
     const handleSignOut = () => {
         const tokens = JSON.parse(localStorage.getItem('tokens'));
-        if (tokens.AccessToken) {
+        if (tokens && tokens.AccessToken) {
           const cognito = new AWS.CognitoIdentityServiceProvider();
           const params = {
             AccessToken: tokens.AccessToken,
