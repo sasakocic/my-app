@@ -10,21 +10,24 @@ import { TermsAndConditions } from './TermsAndConditions';
 import PrivacyPolicy from './PrivacyPolicy';
 import Imprint from './Imprint';
 import Greeting from './Greeting';
-import Login from './Login';
+// import Login from './Login';
 import Logout from './Logout';
 import NotFound from './NotFound';
 import { Navigate } from 'react-router-dom';
-// import { Login, handleSignOut } from './Login';
+import { useState } from 'react';
+import { Login, getEmail } from './Login';
 
 export function Header() {
+  const [email, setEmail] = useState('Sign In');
   const tokens = JSON.parse(localStorage.getItem('tokens'));
   
   useEffect(() => {
       // Check if user is authenticated (e.g., check tokens in local storage)
     if (tokens && !isTokenExpired(tokens.AccessToken)) {
-
+      setEmail(getEmail(tokens));
     } else {
       // Clear the tokens from localStorage if expired or not found
+      setEmail('Sign In');
     }
   }, []);
 
@@ -43,9 +46,9 @@ export function Header() {
     if (tokens) {
       // User is logged in
       // Decode the ID token to extract the user attributes
-      const decodedIdToken = jwtDecode(tokens.IdToken);
+      // const decodedIdToken = jwtDecode(tokens.IdToken);
       // console.log(decodedIdToken);
-      const email = decodedIdToken.email;
+      // const email = decodedIdToken.email;
       // console.log(email);
       return (
         <NavDropdown title={email} id="basic-nav-dropdown">
@@ -58,7 +61,7 @@ export function Header() {
     } else {
       // User is not logged in
       return (
-        <NavDropdown title="Sign In" id="basic-nav-dropdown">
+        <NavDropdown title={email} id="basic-nav-dropdown">
           {/* <Form>
             <Form.Group controlId="username">
               <Form.Label>Username:</Form.Label>
@@ -109,10 +112,12 @@ export function Header() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/imprint" element={<Imprint />} />
         <Route path="/profile" element={tokens ? <ProfileButton /> : <Navigate to="/login" replace />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setEmail={setEmail}/>} />
         <Route path="/logout" element={<Logout />} />
         <Route path="*" element={<NotFound />} />      
       </Routes>         
     </>
   );
 }
+
+

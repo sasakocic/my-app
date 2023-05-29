@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import jwtDecode from 'jwt-decode';
 import AWS from "aws-sdk";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +10,13 @@ AWS.config.update({
   secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
 });
 
-const Login = () => {
+export function getEmail(tokens) {
+  const decodedIdToken = jwtDecode(tokens.IdToken);
+  const email = decodedIdToken.email;
+  return email;
+}
+
+export const Login = ({ setEmail }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -41,7 +48,7 @@ const Login = () => {
         setRefreshTimeout(refreshTimeout);        
         console.log(data.AuthenticationResult.AccessToken);
         // Redirect to the home page
-        alert('navigate');
+        setEmail(getEmail(data.AuthenticationResult));
         navigate('/');
       }
     });
@@ -124,5 +131,3 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;
