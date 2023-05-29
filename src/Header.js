@@ -11,8 +11,10 @@ import PrivacyPolicy from './PrivacyPolicy';
 import Imprint from './Imprint';
 import Greeting from './Greeting';
 import Login from './Login';
+import Logout from './Logout';
 import NotFound from './NotFound';
 import { Navigate } from 'react-router-dom';
+// import { Login, handleSignOut } from './Login';
 
 export function Header() {
   const tokens = JSON.parse(localStorage.getItem('tokens'));
@@ -49,6 +51,8 @@ export function Header() {
         <NavDropdown title={email} id="basic-nav-dropdown">
           {email}
           {/* <NavDropdown.Item onClick={handleSignOut}>Sign Out</NavDropdown.Item> */}
+          <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/logout">Sign Out</NavDropdown.Item>
         </NavDropdown>
       );
     } else {
@@ -83,65 +87,34 @@ export function Header() {
   };
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container">
-          <Link className="navbar-brand" to="/">
-            Home
-          </Link>
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" to="/greeting">
-                Greeting
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/profile">
-                Profile
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/shopping-list">
-                Shopping List
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/counters">
-                Counters
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand>My App</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#">Home</Nav.Link>
-            <Nav.Link href="#">About</Nav.Link> 
-            <Nav.Link href="#">Contact</Nav.Link>
-          </Nav>
-          <Nav>{renderAuthDropdown()}</Nav>
-        </Navbar.Collapse>
-      </Navbar>   
+      <div className="container">
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand>My App</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/greeting">Greeting</Nav.Link>
+              <Nav.Link href="/shopping-list">Shopping List</Nav.Link>
+              <Nav.Link href="/counters">Counters</Nav.Link>
+            </Nav>
+            <Nav>{renderAuthDropdown()}</Nav>
+          </Navbar.Collapse>
+        </Navbar>   
+      </div>
       <Routes>
-      <Route path="/" element={tokens
-        ? <Home />
-        : <Navigate to="/login" replace />
-      } />
-      <Route path="/greeting" element={<Greeting name="World" />} />
-      <Route path="/shopping-list" element={<ShoppingList />} />
-      <Route path="/counters" element={<Counters />} />
-      <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-      <Route path="/imprint" element={<Imprint />} />
-      <Route path="/profile" element={tokens
-        ? <ProfileButton />
-        : <Navigate to="/login" replace />
-      } />
-      <Route path="/login" element={<Login />} />
-      <Route path="*" element={<NotFound />} />      
-    </Routes>         
+        <Route path="/" element={tokens ? <Home /> : <Navigate to="/login" replace />} />
+        <Route path="/greeting" element={<Greeting name="World" />} />
+        <Route path="/shopping-list" element={<ShoppingList />} />
+        <Route path="/counters" element={<Counters />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/imprint" element={<Imprint />} />
+        <Route path="/profile" element={tokens ? <ProfileButton /> : <Navigate to="/login" replace />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="*" element={<NotFound />} />      
+      </Routes>         
     </>
   );
 }

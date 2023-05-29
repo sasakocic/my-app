@@ -55,7 +55,6 @@ const Login = () => {
           console.error(err);
           // Handle the sign-out error
         } else {
-          alert('signout');
           // Clear the refresh timeout when signing out
           clearTimeout(refreshTimeout);
           localStorage.removeItem('tokens');
