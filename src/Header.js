@@ -38,7 +38,7 @@ export function Header() {
   };
 
   const renderAuthDropdown = () => {
-    const tokens = JSON.parse(localStorage.getItem('tokens'));
+    // const tokens = JSON.parse(localStorage.getItem('tokens'));
     // console.log(isAuthenticated)
     if (tokens) {
       // User is logged in
@@ -87,21 +87,19 @@ export function Header() {
   };
   return (
     <>
-      <div className="container">
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand>My App</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/greeting">Greeting</Nav.Link>
-              <Nav.Link href="/shopping-list">Shopping List</Nav.Link>
-              <Nav.Link href="/counters">Counters</Nav.Link>
-            </Nav>
-            <Nav>{renderAuthDropdown()}</Nav>
-          </Navbar.Collapse>
-        </Navbar>   
-      </div>
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand>My App</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/greeting">Greeting</Nav.Link>
+            <Nav.Link href="/shopping-list">Shopping List</Nav.Link>
+            <Nav.Link href="/counters">Counters</Nav.Link>
+          </Nav>
+          <Nav className="ms-auto">{renderAuthDropdown()}</Nav>
+        </Navbar.Collapse>
+      </Navbar>   
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/greeting" element={<Greeting name="World" />} />
