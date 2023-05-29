@@ -8,7 +8,7 @@ function Imprint() {
       <h2 className="Imprint-subheading">Firma</h2>
       <p className="Imprint-content">Weg 263, Stadt</p>
       <p className="Imprint-content">Phone: +49 123-456-7890</p>
-      <p className="Imprint-content">Email: info@itspektar.com</p>
+      <p className="Imprint-content">Email: info@firma.de</p>
 
       <h2 className="Imprint-subheading">Represented by</h2>
       <p className="Imprint-content">Sasa Kocic (CEO)</p>
