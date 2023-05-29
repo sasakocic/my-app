@@ -5,8 +5,8 @@ function Imprint() {
   return (
     <div className="Imprint-container">
       <h1 className="Imprint-heading">Imprint</h1>
-      <h2 className="Imprint-subheading">IT Spektar</h2>
-      <p className="Imprint-content">Fehnweg 163, Hamburg</p>
+      <h2 className="Imprint-subheading">Firma</h2>
+      <p className="Imprint-content">Weg 263, Stadt</p>
       <p className="Imprint-content">Phone: +49 123-456-7890</p>
       <p className="Imprint-content">Email: info@itspektar.com</p>
 
