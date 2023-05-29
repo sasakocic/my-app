@@ -103,7 +103,7 @@ export function Header() {
         </Navbar>   
       </div>
       <Routes>
-        <Route path="/" element={tokens ? <Home /> : <Navigate to="/login" replace />} />
+        <Route path="/" element={<Home />} />
         <Route path="/greeting" element={<Greeting name="World" />} />
         <Route path="/shopping-list" element={<ShoppingList />} />
         <Route path="/counters" element={<Counters />} />

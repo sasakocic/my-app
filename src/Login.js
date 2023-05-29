@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AWS from "aws-sdk";
 import { Button, Form } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 
 AWS.config.update({
   region: process.env.REACT_APP_AWS_REGION,
@@ -9,6 +10,7 @@ AWS.config.update({
 });
 
 const Login = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [refreshTimeout, setRefreshTimeout] = useState(0);
@@ -38,6 +40,9 @@ const Login = () => {
         // Store the refresh timeout ID in state for later cleanup
         setRefreshTimeout(refreshTimeout);        
         console.log(data.AuthenticationResult.AccessToken);
+        // Redirect to the home page
+        alert('navigate');
+        navigate('/');
       }
     });
   };  
