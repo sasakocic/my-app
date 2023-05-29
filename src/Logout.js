@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
 
-const Logout = () => {
+const Logout = ({ setEmail }) => {
     const handleSignOut = () => {
         const tokens = JSON.parse(localStorage.getItem('tokens'));
         if (tokens && tokens.AccessToken) {
@@ -17,13 +17,14 @@ const Logout = () => {
               // Clear the refresh timeout when signing out
             //   clearTimeout(refreshTimeout);
               localStorage.removeItem('tokens');
+              setEmail('Sign In')
               // Handle the sign-out success          
             }
           });
         } else {
           // Access token is empty, ignoring already signed-off
         }
-      };
+    };
      
     handleSignOut();  
     return (

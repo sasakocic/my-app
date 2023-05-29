@@ -38,7 +38,7 @@ export const Login = ({ setEmail }) => {
         console.error(err);
         // Handle the authentication error
       } else {
-        console.log(data.AuthenticationResult);
+        // console.log(data.AuthenticationResult);
         // Handle the authentication success
         localStorage.setItem('tokens', JSON.stringify(data.AuthenticationResult))
         // Schedule a token refresh when the access token is close to expiration
@@ -46,7 +46,7 @@ export const Login = ({ setEmail }) => {
 
         // Store the refresh timeout ID in state for later cleanup
         setRefreshTimeout(refreshTimeout);        
-        console.log(data.AuthenticationResult.AccessToken);
+        // console.log(data.AuthenticationResult.AccessToken);
         // Redirect to the home page
         setEmail(getEmail(data.AuthenticationResult));
         navigate('/');
@@ -94,7 +94,7 @@ export const Login = ({ setEmail }) => {
         console.error(err);
         // Handle the error when refreshing access token fails
       } else {
-        console.log('refreshAccessToken', data.AuthenticationResult);
+        // console.log('refreshAccessToken', data.AuthenticationResult);
         // Update the access token in state
         localStorage.setItem('tokens', JSON.stringify(data.AuthenticationResult))
       }

@@ -52,10 +52,9 @@ export function Header() {
       // console.log(email);
       return (
         <NavDropdown title={email} id="basic-nav-dropdown">
-          {email}
           {/* <NavDropdown.Item onClick={handleSignOut}>Sign Out</NavDropdown.Item> */}
           <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
-          <NavDropdown.Item as={Link} to="/logout">Sign Out</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/logout">Logout</NavDropdown.Item>
         </NavDropdown>
       );
     } else {
@@ -113,7 +112,7 @@ export function Header() {
         <Route path="/imprint" element={<Imprint />} />
         <Route path="/profile" element={tokens ? <ProfileButton /> : <Navigate to="/login" replace />} />
         <Route path="/login" element={<Login setEmail={setEmail}/>} />
-        <Route path="/logout" element={<Logout />} />
+        <Route path="/logout" element={<Logout setEmail={setEmail}/>} />
         <Route path="*" element={<NotFound />} />      
       </Routes>         
     </>
